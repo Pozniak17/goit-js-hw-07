@@ -33,18 +33,33 @@ const addGallaryMarkup = createGallaryMarkup(galleryItems);
 
 divRef.innerHTML = addGallaryMarkup;
 
+divRef.addEventListener("click", onImageClick);
+
 //*✅ Зверни увагу на те, що зображення обгорнуте посиланням, отже по кліку за замовчуванням користувач буде перенаправлений на іншу сторінку. Заборони цю поведінку за замовчуванням.
 function onImageClick(evt) {
-  //* заборона стандартних дій, щоб браузер не відкривав картинку по посиланню
-  evt.preventDefault();
-  //* перевіряємо, якщо не картинка, виходимо
-  if (evt.target.nodeName !== "IMG") return;
+  //! заборона стандартних дій, щоб браузер не відкривав картинку по посиланню
+  blockStandartAction(evt);
+  //! перевіряємо, якщо не картинка, виходимо
 
-  //* в протилежному випадку вик. бібліотеку basic lightbox
+  if (evt.target.nodeName !== "IMG") {
+    return;
+  }
+
+  //! в протилежному випадку вик. бібліотеку basic lightbox
   const instance = basicLightbox.create(`
-    <img src="${evt.target.dataset.source}" width="800" height="600">
-`);
+      <img src="${evt.target.dataset.source}" width="800" height="600">
+  `);
   instance.show();
+
+  //! Закриття
+  divRef.addEventListener("keydown", (evt) => {
+    if (evt.code === "Escape") {
+      instance.close();
+    }
+  });
 }
 
-divRef.addEventListener("click", onImageClick);
+//* Розбиваю на функції
+function blockStandartAction(evt) {
+  evt.preventDefault();
+}
