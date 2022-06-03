@@ -1,16 +1,7 @@
 import { galleryItems } from "./gallery-items.js";
 // Change code below this line
 
-// console.log(galleryItems);
-
-//*✅ 1.Створення і рендер розмітки
-
-//* 2.Реалізація делегування на div.gallery і отримання url великого зображення.
-const divRef = document.querySelector(".gallery");
-console.log(divRef);
-
-//* отримання url великого зображення.
-const originalImgRef = galleryItems.forEach((item) => item.original);
+console.log(galleryItems);
 
 function createGallaryMarkup(items) {
   return items
@@ -35,7 +26,6 @@ divRef.innerHTML = addGallaryMarkup;
 
 divRef.addEventListener("click", onImageClick);
 
-//*✅ Зверни увагу на те, що зображення обгорнуте посиланням, отже по кліку за замовчуванням користувач буде перенаправлений на іншу сторінку. Заборони цю поведінку за замовчуванням.
 function onImageClick(evt) {
   //! заборона стандартних дій, щоб браузер не відкривав картинку по посиланню
   blockStandartAction(evt);
