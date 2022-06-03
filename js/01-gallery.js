@@ -3,6 +3,8 @@ import { galleryItems } from "./gallery-items.js";
 
 console.log(galleryItems);
 
+const divRef = document.querySelector(".gallery");
+
 function createGallaryMarkup(items) {
   return items
     .map(
